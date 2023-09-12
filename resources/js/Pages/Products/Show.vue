@@ -31,7 +31,7 @@ const addToCart = () => {
                     <hr class="pb-5">
 
                     <div class="flex flex-row flex-wrap gap-2 pb-5">
-                        <template v-for="(variant, index) in variants">
+                        <template v-for="(variant, index) in product.variants">
                             <div
                                 :title="index"
                                 @click="selected = variant"
@@ -45,6 +45,15 @@ const addToCart = () => {
                                         </div>
                                     </template>
                                 </div>
+<!--                                <div :class="'bg-'+variant.colour+'-500'" class="h-6 w-6 rounded-full p-1">-->
+<!--                                    <template v-if="selected && selected.sku === variant.sku">-->
+<!--                                        <div class="text-white">-->
+<!--                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">-->
+<!--                                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/>-->
+<!--                                            </svg>-->
+<!--                                        </div>-->
+<!--                                    </template>-->
+<!--                                </div>-->
                             </div>
                         </template>
                     </div>
@@ -60,19 +69,17 @@ const addToCart = () => {
                     </div>
 
                     <div class="options">
-                        <template v-if="selected">
-                            <button
-                                type="button"
-                                class="text-white bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none disabled:opacity-25"
-                                role="link"
-                                :disabled="!selected"
-                                @click="addToCart"
-                            >Add to cart
-                            </button>
-                            <div>
-                                Selected: <span>{{ selected.sku }}</span>, <span class="uppercase">{{ selected.size }}</span>, <span class="uppercase">{{ selected.colour }}</span>
-                            </div>
-                        </template>
+                        <button
+                            type="button"
+                            class="text-white bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none disabled:opacity-25"
+                            role="link"
+                            :disabled="!selected"
+                            @click="addToCart"
+                        >Add to cart
+                        </button>
+                        <div v-if="selected">
+                            Selected: <span>{{ selected.sku }}</span>, <span class="uppercase">{{ selected.size }}</span>, <span class="uppercase">{{ selected.colour }}</span>
+                        </div>
                     </div>
                 </div>
             </div>

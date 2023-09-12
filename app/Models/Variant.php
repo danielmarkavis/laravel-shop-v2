@@ -19,7 +19,7 @@ class Variant extends Model implements HasMedia
         'colour',
         'price',
         'sku',
-        'quantity'
+        'stock'
     ];
 
     protected $appends = [

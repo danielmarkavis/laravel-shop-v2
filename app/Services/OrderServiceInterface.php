@@ -10,5 +10,5 @@ interface OrderServiceInterface
 {
     public function get(int $order_id);
     public function all();
-    public function store(CartService $cart, Address $address): Order;
+    public function store(CartService $cart, Address $address): \Illuminate\Http\RedirectResponse|Order;
 }

@@ -25,9 +25,11 @@ class ProductSeeder extends Seeder
 
     public function run(): void
     {
-        $products = Product::factory()
+        $colors = ['green','blue','red,','yellow','pink'];
+
+        Product::factory()
             ->count(25)
-            ->hasVariants(rand(2, 5))
+            ->hasVariants(rand(2, 4))
             ->create()
             ->each(
             /**
@@ -36,16 +38,8 @@ class ProductSeeder extends Seeder
              * @throws \Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig
              */
             function(Product $product) {
-                foreach ($product->variants as $variant) {
-                    $color = match ($variant['colour']) {
-                        'red' => 'FF0000',
-                        'green' => '00FF00',
-                        'blue' => '0000FF',
-                        'yellow' => 'FFFF00',
-                        default => 'FFC0CB'
-                    };
-
-                    $imageUrl = sprintf("https://placehold.co/360x360/%s/FFFFFF/png", $color);
+                foreach ($product->variants as $index => $variant) {
+                    $imageUrl = sprintf("http://dma.local/images/%s.png", $variant['colour']);
                     $variant->addMediaFromUrl($imageUrl)->toMediaCollection('default');
                 }
 

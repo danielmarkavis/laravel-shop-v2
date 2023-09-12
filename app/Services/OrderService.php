@@ -6,6 +6,7 @@ use App\Models\Address;
 use App\Models\Order;
 use App\Models\OrderProduct;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Str;
 
 class OrderService implements OrderServiceInterface
@@ -20,10 +21,9 @@ class OrderService implements OrderServiceInterface
         return Order::whereAuthed()->with(['orderProducts.variant.product','address'])->get();
     }
 
-    public function store(CartService $cart, Address $address): Order
+    public function store(CartService $cart, Address $address): RedirectResponse|Order
     {
         $orderSession = session()->get('order', []);
-
         if(isset($orderSession['uuid'])) {
             $order = Order::where('uuid', $orderSession['uuid'])->first();
         } else {
@@ -44,6 +44,12 @@ class OrderService implements OrderServiceInterface
             $order->save();
 
             foreach ($cart->get() as $variant) {
+//                $order->orderProducts()->save(new OrderProduct([
+//                    'order_id' => $order->id,
+//                    'variant_id' => $variant['id'],
+//                    'quantity' => $variant['quantity'],
+//                    'price' => $variant['price'],
+//                ]));
                 $orderProduct = new OrderProduct();
                 $orderProduct->order_id = $order->id;
                 $orderProduct->variant_id = $variant['id'];
@@ -51,6 +57,11 @@ class OrderService implements OrderServiceInterface
                 $orderProduct->price = $variant['price'];
                 $orderProduct->save();
             }
+        }
+
+        if ($order === null) {
+            $this->purgeSession();
+            return redirect()->route('cart.index');
         }
 
         session()->put('order', $orderSession);

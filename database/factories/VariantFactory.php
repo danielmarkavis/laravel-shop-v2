@@ -10,18 +10,22 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class VariantFactory extends Factory
 {
+    private static int $order = 0;
+    private static array $colors = ['green', 'blue', 'red', 'yellow', 'pink'];
+    private static array $sizeArray = ['xs','sm','md','lg','xl','xxl'];
+
+
     public function definition(): array
     {
-        $sizeArray = ['xs','sm','md','lg','xl','xxl'];
-        $colourArray = ['blue','red','green','yellow'];
+        if (self::$order >= 5) self::$order = 0;
 
         return [
             'product_id' => Product::inRandomOrder()->first()->id,
             'sku' => 'VAR'.str_pad(rand(1,999999), 8, '0', STR_PAD_LEFT),
-            'size' => $sizeArray[array_rand($sizeArray, 1)],
-            'colour' => $colourArray[array_rand($colourArray, 1)],
+            'colour' => self::$colors[self::$order++],
+            'size' => self::$sizeArray[array_rand(self::$sizeArray, 1)],
             'price' => rand(10,99),
-            'quantity' => rand(1,99),
+            'stock' => rand(1,99),
         ];
     }
 }
