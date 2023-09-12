@@ -17,7 +17,7 @@ const addToCart = () => {
 </script>
 
 <template>
-    <GuestLayout title="Products">
+    <GuestLayout title="Product">
         <div class="container mx-auto">
             <div class="grid grid-cols-2 gap-2">
                 <div>

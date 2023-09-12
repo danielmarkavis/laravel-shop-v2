@@ -4,9 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Repositories\ProductsIndex;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
 use Inertia\Response;
 use Inertia\ResponseFactory;
 

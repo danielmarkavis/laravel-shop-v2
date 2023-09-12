@@ -44,10 +44,6 @@ const form = useForm<{
     address_id: props.addresses.length ? props.addresses[0]['id'] : -1
 });
 
-const deleteFromCart = (sku) => {
-    router.visit(route('delete.from.cart', {variant: sku}));
-}
-
 const handleSubmit = (): void => {
     form.post(route('checkout.store'), {
         onSuccess: () => form.reset(),

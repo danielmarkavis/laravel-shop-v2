@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import GuestLayout from "@/Layouts/GuestLayout.vue";
-import {router, useForm} from '@inertiajs/vue3';
+import {useForm} from '@inertiajs/vue3';
 import {ref} from "vue";
 import IPaypal from "@/Components/Icons/IPaypal.vue";
 import IVisa from "@/Components/Icons/IVisa.vue";
@@ -25,10 +25,6 @@ const form = useForm<{
     redirect: false,
 });
 
-const deleteFromCart = (sku) => {
-    router.visit(route('delete.from.cart', {variant: sku}));
-}
-
 const handleSubmit = (): void => {
     form.post(route('payment.store'), {
         onSuccess: () => form.reset(),
@@ -39,7 +35,7 @@ const activeTab = ref(0);
 </script>
 
 <template>
-    <GuestLayout title="Cart">
+    <GuestLayout title="Payment">
         <div class="container mx-auto">
             <template v-if="products.length">
                 <div class="grid grid-cols-2 gap-2">

@@ -1,21 +1,13 @@
 <script setup lang="ts">
-import {ref} from "vue";
 import GuestLayout from "@/Layouts/GuestLayout.vue";
-import { router } from '@inertiajs/vue3'
 
 const props = defineProps<{
     order: object,
 }>();
-
-const selected = ref(null);
-
-const addToCart = () => {
-    router.visit(route('add.to.cart',{variant: selected.value.sku}));
-}
 </script>
 
 <template>
-    <GuestLayout title="Products">
+    <GuestLayout title="Payment Complete">
         <div class="container mx-auto">
             <div class="flex flex-row items-center justify-center">
                 <div class="bg-green-500 text-white rounded-full p-5 mr-5 my-12">

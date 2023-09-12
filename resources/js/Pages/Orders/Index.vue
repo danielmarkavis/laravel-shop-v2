@@ -1,24 +1,21 @@
 <script setup lang="ts">
-import GuestLayout from "@/Layouts/GuestLayout.vue";
-import {router} from "@inertiajs/vue3";
+import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 
 interface Order {
     uuid: string,
     quantity: string,
     total: float,
+    order_products: Array<object>
+    status: string
 }
 
 const props = defineProps<{
     orders: Array<Order>,
 }>();
-
-const deleteFromCart = (sku) => {
-    router.visit(route('delete.from.cart', {variant: sku}));
-}
 </script>
 
 <template>
-    <GuestLayout title="Cart">
+    <AuthenticatedLayout title="Orders">
         <div class="container mx-auto">
             <div class="py-12">
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -62,5 +59,5 @@ const deleteFromCart = (sku) => {
                 </div>
             </div>
         </div>
-    </GuestLayout>
+    </AuthenticatedLayout>
 </template>
