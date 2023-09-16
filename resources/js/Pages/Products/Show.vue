@@ -14,14 +14,15 @@ const selected = ref(null);
 const addToCart = () => {
     router.visit(route('add.to.cart', {variant: selected.value.sku}));
 }
+
 </script>
 
 <template>
     <GuestLayout title="Product">
         <div class="container mx-auto">
             <div class="grid grid-cols-2 gap-2">
-                <div>
-                    <img :src="selected ? selected.image.url : product.variants[0].image.url" alt="image"/>
+                <div v-if="selected?.image">
+                    <img :src="selected ? selected?.image.url : product.variants[0].image.url" alt="image"/>
                 </div>
 
                 <div class="flex flex-col justify-center">

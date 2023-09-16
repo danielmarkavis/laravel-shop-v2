@@ -4,6 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -15,8 +19,6 @@ class Variant extends Model implements HasMedia
     use InteractsWithMedia;
 
     protected $fillable = [
-        'size',
-        'colour',
         'price',
         'sku',
         'stock'
@@ -49,11 +51,23 @@ class Variant extends Model implements HasMedia
         return $this->product()->pluck('sku');
     }
 
-    public function product(): \Illuminate\Database\Eloquent\Relations\HasOne
+    public function product(): HasOne
     {
         return $this
             ->HasOne(Product::class, 'id','product_id');
     }
+
+    public function attributeValues(): BelongsToMany
+    {
+        return $this
+            ->belongsToMany(AttributeValue::class);
+    }
+
+//    public function sizeAttribute(): BelongsToMany
+//    {
+//        return $this
+//            ->belongsToMany(Attribute::class)->where('name','size');
+//    }
 
     public function getImageAttribute(): ?object
     {
@@ -74,6 +88,6 @@ class Variant extends Model implements HasMedia
 
     public function getBackgroundAttribute(): string
     {
-        return sprintf('bg-%s-500', $this->colour);
+        return sprintf('bg-%s-500', $this->colour); // this now needs to goto $variant->attributes->colour whatever that entails.
     }
 }

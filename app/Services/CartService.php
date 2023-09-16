@@ -21,6 +21,7 @@ class CartService implements CartServiceInterface
      */
     public function store(Variant $variant): void
     {
+        dd($variant->image);
         $cart = session()->get('cart', []);
         $sku = $variant->sku;
         $product = $variant->product;

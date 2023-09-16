@@ -18,10 +18,8 @@ return new class extends Migration
             $table->decimal('vat', 6,2);
             $table->decimal('total', 6,2);
             $table->string('status');
-            $table->foreignId('shipping_address_id');
-            $table->foreign('shipping_address_id')->references('id')->on('customer_address')->onDelete('cascade');
-            $table->foreignId('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreignId('shipping_address_id')->references('id')->on('customer_address')->onDelete('cascade');
+            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

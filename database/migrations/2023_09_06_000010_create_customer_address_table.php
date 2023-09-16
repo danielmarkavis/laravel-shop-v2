@@ -13,8 +13,7 @@ return new class extends Migration
     {
         Schema::create('customer_address', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('first_name');
             $table->string('last_name');
             $table->string('phone_number');

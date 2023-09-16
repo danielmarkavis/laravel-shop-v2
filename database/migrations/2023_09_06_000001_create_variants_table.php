@@ -14,12 +14,10 @@ return new class extends Migration
         Schema::create('variants', function (Blueprint $table) {
             $table->id();
             $table->string('sku')->unique();
-            $table->string('size');
-            $table->string('colour');
+            $table->string('description')->nullable();
             $table->decimal('price', 6,2);
             $table->integer('stock');
-            $table->foreignId('product_id');
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade'); //->constrained('products')->cascadeOnDelete();
+            $table->foreignID('product_id')->references('id')->on('products')->onDelete('cascade'); //->constrained('products')->cascadeOnDelete();
             $table->timestamps();
         });
     }
