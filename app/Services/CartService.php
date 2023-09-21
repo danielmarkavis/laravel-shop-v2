@@ -33,12 +33,29 @@ class CartService implements CartServiceInterface
                 "id" => $variant->id,
                 "sku" => $variant->sku,
                 "quantity" => 1,
+                "stock" => $variant->stock,
                 "price" => $variant->price,
                 "colour" => $variant->colour, //attributeValues()->attributeOnly('colour')->first()->value,
                 "size" => $variant->size, //attributeValues()->attributeOnly('size')->first()->value,
                 "image" => $variant->image->url
             ];
         }
+
+        session()->put('cart', $cart);
+    }
+
+    /**
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
+     */
+    public function update(Variant $variant, int $quantity): void
+    {
+//        dd($variant, $quantity);
+
+        $cart = session()->get('cart', []);
+        $sku = $variant->sku;
+
+        $cart[$sku]['quantity'] = $quantity;
 
         session()->put('cart', $cart);
     }

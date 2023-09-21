@@ -44,6 +44,7 @@ Route::group([
 
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
     Route::get('/add-to-cart/{variant:sku}', [CartController::class, 'store'])->name('add.to.cart');
+    Route::get('/update-the-cart/{variant:sku}/{quantity}', [CartController::class, 'update'])->name('update.the.cart');
     Route::get('/delete-from-cart/{variant:sku}', [CartController::class, 'destroy'])->name('delete.from.cart');
 });
 

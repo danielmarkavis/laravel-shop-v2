@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import GuestLayout from "@/Layouts/GuestLayout.vue";
 import {router} from "@inertiajs/vue3";
+import Quantity from "@/Components/Quantity.vue";
+import {ref} from "vue";
+import ICircle from "@/Components/Icons/ICircle.vue";
 
 interface CartProduct {
     name: string,
@@ -8,6 +11,7 @@ interface CartProduct {
     colour: string,
     size: string,
     quantity: string,
+    stock: string,
     price: float,
 }
 
@@ -16,16 +20,34 @@ const props = defineProps<{
     total: int
 }>();
 
-const deleteFromCart = (sku) => {
-    router.visit(route('delete.from.cart',{variant: sku}));
+const updating = ref(false);
+
+const updateCart = (sku, quantity) => {
+    router.visit(route('update.the.cart',{variant: sku, quantity: quantity}),{
+        onBefore: () => {updating.value = true},
+        onFinish: () => {updating.value = false}
+    });
 }
-</script>
+
+const deleteFromCart = (sku) => {
+    router.visit(route('delete.from.cart',{variant: sku}),{
+        onBefore: () => {updating.value = true},
+        onFinish: () => {updating.value = false}
+    });
+}</script>
 
 <template>
     <GuestLayout title="Cart">
         <div class="container mx-auto">
             <template v-if="products.length">
                 <div class="grid grid-cols-2 gap-2">
+                    <template v-if="updating">
+                        <div class="absolute top-0 bottom-0 left-0 right-0 flex items-center justify-center bg-white bg-opacity-75">
+                            <div class="h-12 w-12 text-blue-500">
+                                <ICircle />
+                            </div>
+                        </div>
+                    </template>
                     <template v-for="(details, index) in products">
                         <img :src="details.image" alt="image" class="h-64"/>
 
@@ -44,7 +66,10 @@ const deleteFromCart = (sku) => {
                                         <p class="">Sku: <span class="uppercase text-gray-500">{{ details.sku }}</span></p>
                                         <p class="">Colour: <span class="uppercase text-gray-500">{{ details.colour }}</span></p>
                                         <p class="">Size: <span class="uppercase text-gray-500">{{ details.size }}</span></p>
-                                        <div class=""> Quantity: {{ details.quantity }}</div>
+                                        <Quantity :value="details.quantity" :max="details.stock" :sku="details.sku" @update="updateCart"/>
+                                        <template v-if="details.stock < 10">
+                                            <p class="text-red-500">Low stock</p>
+                                        </template>
                                         <div class="flex mt-5">
                                             <a @click="deleteFromCart(details.sku)" class="text-white bg-red-500 hover:bg-red-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">

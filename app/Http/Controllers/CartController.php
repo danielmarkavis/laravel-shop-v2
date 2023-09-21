@@ -34,6 +34,17 @@ class CartController extends Controller
     }
 
     /**
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
+     */
+    public function update(Variant $variant, CartServiceInterface $cart,int $quantity): \Illuminate\Foundation\Application|Redirector|RedirectResponse|Application
+    {
+        $cart->update($variant, $quantity);
+
+        return redirect()->route('cart.index')->with('success', 'Product updated!');
+    }
+
+    /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $sku, CartServiceInterface $cart): \Illuminate\Foundation\Application|Redirector|RedirectResponse|Application
