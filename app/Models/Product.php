@@ -53,20 +53,33 @@ class Product extends Model implements HasMedia
             ->HasMany(Variant::class);
     }
 
+    /**
+     * Will return either
+     * 1) image from media
+     * 2) Image from first variant.
+     *
+     * @return object|null
+     */
     public function getImageAttribute(): ?object
     {
         if (!$this->hasMedia()) {
-            return null;
+            $media = $this->variants?->first()->image ?? null;
+            if (!$media) {
+                return null;
+            }
+        } else {
+            $media = $this->getFirstMedia();
         }
-
-        $media = $this->getFirstMedia();
         $isSVG = $media?->mime_type === 'image/svg+xml';
+        $url = $media->url ?? $media->getUrl() ?? null;
+        $thumbnail = $media->thumbnail ?? $media->getUrl('product_thumbnail') ?? null;
+        $mimeType = $media?->url ? null : $media->getTypeFromMime();
 
         return (object)[
             'id' => $media->id,
-            'url' => $media->getUrl(),
-            'thumbnail' => $isSVG ? $media->getUrl() : $media->getUrl('product_thumbnail'),
-            'mime_type' => $media->getTypeFromMime()
+            'url' => $url,
+            'thumbnail' => $isSVG ? $url : $thumbnail,
+            'mime_type' => $mimeType
         ];
     }
 

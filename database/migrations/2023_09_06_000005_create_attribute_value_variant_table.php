@@ -11,12 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('attribute_value_variant', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('variant_id')->references('id')->on('variants')->onDelete('cascade'); //->constrained('products')->cascadeOnDelete();
-            $table->foreignId('attribute_value_id')->references('id')->on('attribute_values')->onDelete('cascade'); //->constrained('products')->cascadeOnDelete();
-            $table->timestamps();
-        });
+//        Schema::create('attribute_value_variant', function (Blueprint $table) {
+//            $table->id();
+//            $table->foreignId('variant_id')->references('id')->on('variants')->onDelete('cascade'); //->constrained('products')->cascadeOnDelete();
+//            $table->foreignId('attribute_value_id')->references('id')->on('attribute_values')->onDelete('cascade'); //->constrained('products')->cascadeOnDelete();
+//
+////            $table->foreignId('attribute_id')->references('id')->on('attributes')->onDelete('cascade'); //->constrained('products')->cascadeOnDelete();
+////            $table->string('value');
+//            $table->timestamps();
+//        });
     }
 
     /**
@@ -24,11 +27,11 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('attribute_value_variant', function (Blueprint $table) {
-            $table->dropForeign(['variant_id']);
-            $table->dropForeign(['attribute_value_id']);
-        });
-
-        Schema::dropIfExists('attribute_value_variant');
+//        Schema::table('attribute_value_variant', function (Blueprint $table) {
+//            $table->dropForeign(['variant_id']);
+//            $table->dropForeign(['attribute_value_id']);
+//        });
+//
+//        Schema::dropIfExists('attribute_value_variant');
     }
 };

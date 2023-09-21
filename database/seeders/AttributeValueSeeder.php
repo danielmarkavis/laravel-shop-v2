@@ -22,12 +22,12 @@ class AttributeValueSeeder extends Seeder
                         'size' => AttributeValue::factory()
                             ->state(
                                 new Sequence(
-                                    ['value' => 'xs', 'description' => 'This is extra small'],
-                                    ['value' => 'sm', 'description' => 'This is small'],
-                                    ['value' => 'md', 'description' => 'This is medium'],
-                                    ['value' => 'lg', 'description' => 'This is large'],
-                                    ['value' => 'xl', 'description' => 'This is extra large'],
-                                    ['value' => 'xxl', 'description' => 'This is extra extra large'],
+                                    ['value' => 'xs', 'label' => 'XS', 'description' => 'This is extra small', 'sequence' => 1],
+                                    ['value' => 'sm', 'label' => 'SM', 'description' => 'This is small', 'sequence' => 2],
+                                    ['value' => 'md', 'label' => 'MD', 'description' => 'This is medium', 'sequence' => 3],
+                                    ['value' => 'lg', 'label' => 'LG', 'description' => 'This is large', 'sequence' => 4],
+                                    ['value' => 'xl', 'label' => 'XL', 'description' => 'This is extra large', 'sequence' => 5],
+                                    ['value' => 'xxl', 'label' => 'XXL', 'description' => 'This is extra extra large', 'sequence' => 6],
                                 )
                             )
                             ->count(6)
@@ -35,11 +35,11 @@ class AttributeValueSeeder extends Seeder
                         'colour' => AttributeValue::factory()
                             ->state(
                                 new Sequence(
-                                    ['value' => 'green', 'description' => 'This is green'],
-                                    ['value' => 'blue', 'description' => 'This is blue'],
-                                    ['value' => 'red', 'description' => 'This is red'],
-                                    ['value' => 'yellow', 'description' => 'This is yellow'],
-                                    ['value' => 'pink', 'description' => 'This is pink'],
+                                    ['value' => 'green', 'label' => 'Green', 'description' => 'This is green', 'sequence' => 1],
+                                    ['value' => 'blue', 'label' => 'Blue', 'description' => 'This is blue', 'sequence' => 1],
+                                    ['value' => 'red', 'label' => 'Red', 'description' => 'This is red', 'sequence' => 1],
+                                    ['value' => 'yellow', 'label' => 'Yellow', 'description' => 'This is yellow', 'sequence' => 1],
+                                    ['value' => 'pink', 'label' => 'Pink', 'description' => 'This is pink', 'sequence' => 1],
                                 )
                             )
                             ->count(5)

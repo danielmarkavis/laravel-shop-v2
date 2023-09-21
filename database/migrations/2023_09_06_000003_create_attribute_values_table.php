@@ -11,13 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('attribute_values', function (Blueprint $table) { // Red, Green, SM, XL, etc
-            $table->id();
-            $table->string('value');
-            $table->text('description');
-            $table->foreignId('attribute_id')->references('id')->on('attributes')->onDelete('cascade'); //->constrained('products')->cascadeOnDelete();
-            $table->timestamps();
-        });
+//        Schema::create('attribute_values', function (Blueprint $table) { // Red, Green, SM, XL, etc
+//            $table->id();
+//            $table->string('value');
+//            $table->string('label');
+//            $table->text('description');
+//            $table->integer('sequence');
+//            $table->foreignId('attribute_id')->references('id')->on('attributes')->onDelete('cascade'); //->constrained('products')->cascadeOnDelete();
+//            $table->timestamps();
+//        });
     }
 
     /**
@@ -25,10 +27,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('attribute_values', function (Blueprint $table) {
-            $table->dropForeign(['attribute_id']);
-        });
-
-        Schema::dropIfExists('attribute_values');
+//        Schema::table('attribute_values', function (Blueprint $table) {
+//            $table->dropForeign(['attribute_id']);
+//        });
+//
+//        Schema::dropIfExists('attribute_values');
     }
 };

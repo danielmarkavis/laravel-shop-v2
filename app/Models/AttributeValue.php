@@ -43,7 +43,7 @@ class AttributeValue extends Model
         $query
             ->whereHas('attribute', function ($query) use ($name) {
                 $query->where('attributes.name', $name);
-            });
+            }); //->orderBy('sequence')
     }
 
 //     public function sizeOnly(): BelongsToMany

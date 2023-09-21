@@ -21,7 +21,6 @@ class CartService implements CartServiceInterface
      */
     public function store(Variant $variant): void
     {
-        dd($variant->image);
         $cart = session()->get('cart', []);
         $sku = $variant->sku;
         $product = $variant->product;
@@ -35,8 +34,8 @@ class CartService implements CartServiceInterface
                 "sku" => $variant->sku,
                 "quantity" => 1,
                 "price" => $variant->price,
-                "colour" => $variant->colour,
-                "size" => $variant->size,
+                "colour" => $variant->colour, //attributeValues()->attributeOnly('colour')->first()->value,
+                "size" => $variant->size, //attributeValues()->attributeOnly('size')->first()->value,
                 "image" => $variant->image->url
             ];
         }

@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('attributes', function (Blueprint $table) { // Size, Colour, Length etc
-            $table->id();
-            $table->string('name');
-            $table->string('description')->nullable();
-            $table->timestamps();
-        });
+//        Schema::create('attributes', function (Blueprint $table) { // Size, Colour, Length etc
+//            $table->id();
+//            $table->string('name');
+//            $table->string('description')->nullable();
+//            $table->timestamps();
+//        });
     }
 
     /**
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('attributes');
+//        Schema::dropIfExists('attributes');
     }
 };

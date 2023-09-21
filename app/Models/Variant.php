@@ -63,12 +63,6 @@ class Variant extends Model implements HasMedia
             ->belongsToMany(AttributeValue::class);
     }
 
-//    public function sizeAttribute(): BelongsToMany
-//    {
-//        return $this
-//            ->belongsToMany(Attribute::class)->where('name','size');
-//    }
-
     public function getImageAttribute(): ?object
     {
         if (!$this->hasMedia()) {
