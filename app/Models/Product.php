@@ -22,11 +22,13 @@ class Product extends Model implements HasMedia
         'name',
         'description',
         'price',
-        'sku'
+        'sku',
+        'sale_price'
     ];
 
     protected $appends = [
         'image',
+        'currency'
     ];
 
     protected $casts = [
@@ -81,6 +83,11 @@ class Product extends Model implements HasMedia
             'thumbnail' => $isSVG ? $url : $thumbnail,
             'mime_type' => $mimeType
         ];
+    }
+
+    public function getCurrencyAttribute(): string
+    {
+        return number_format($this->price, 2);
     }
 
     public function getSearchableColumns(): array

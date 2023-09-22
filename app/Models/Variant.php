@@ -26,7 +26,8 @@ class Variant extends Model implements HasMedia
 
     protected $appends = [
         'image',
-        'background'
+        'background',
+        'currency'
     ];
 
     protected $casts = [
@@ -40,10 +41,15 @@ class Variant extends Model implements HasMedia
             ->singleFile();
     }
 
+    /**
+     * @throws \Spatie\Image\Exceptions\InvalidManipulation
+     */
     public function registerMediaConversions(Media $media = null): void
     {
         $this
-            ->addMediaConversion('variant_thumbnail');
+            ->addMediaConversion('variant_thumbnail')
+            ->width(375)
+            ->height(375);
     }
 
     public function getProductSkuAttribute(): Collection
@@ -84,4 +90,10 @@ class Variant extends Model implements HasMedia
     {
         return sprintf('bg-%s-500', $this->colour); // this now needs to goto $variant->attributes->colour whatever that entails.
     }
+
+    public function getCurrencyAttribute(): string
+    {
+        return number_format($this->price, 2);
+    }
+
 }

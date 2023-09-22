@@ -16,6 +16,7 @@ class ProductsIndex implements ProviderInterface
             'products.name',
             'products.description',
             'products.price',
+            'products.sale_price',
             'products.sku',
         ])
             ->with(['media']);

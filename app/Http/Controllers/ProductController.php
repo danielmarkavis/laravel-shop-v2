@@ -39,6 +39,7 @@ class ProductController extends Controller
         foreach ($product->variants as $index => $variant) {
             $variants[$variant->colour]['image'] = $variant->image;
             $variants[$variant->colour]['colour'] = $variant->colour;
+            $variants[$variant->colour]['price'] = $variant->currency;
             $variants[$variant->colour]['sizes'][$variant->size] = [
                 'sku' => $variant->sku, 'image' => $variant->image->url, 'stock' => $variant->stock, 'label' => strtoupper($variant->size)
             ];

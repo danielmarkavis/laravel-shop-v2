@@ -15,6 +15,7 @@ export default {
         'bg-green-500',
         'bg-yellow-500',
         'bg-pink-500',
+        'bg-gray-900',
     ],
     theme: {
         extend: {

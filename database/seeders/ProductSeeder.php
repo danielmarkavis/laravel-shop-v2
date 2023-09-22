@@ -14,7 +14,14 @@ class ProductSeeder extends Seeder
     {
         Product::factory()
             ->count(25)
-            ->create();
+//            ->state([])
+            ->create()
+        ->each(function(Product $product) {
+            if (rand(1,5) === 3) {
+                $product->sale_price = $product->price * 0.5;
+                $product->save();
+            }
+        });
     }
 
 }

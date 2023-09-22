@@ -3,6 +3,7 @@ import {ref} from "vue";
 import GuestLayout from "@/Layouts/GuestLayout.vue";
 import {router} from '@inertiajs/vue3'
 import BaseButton from "@/Components/Buttons/BaseButton.vue";
+import SalePrice from "@/Components/SalePrice.vue";
 
 defineProps<{
     product: object,
@@ -31,7 +32,7 @@ const addToCart = () => {
 
                 <div class="flex flex-col justify-center">
                     <h2 class="font-bold uppercase text-xl pb-3">{{ product.name }}</h2>
-                    <p class="pb-3 text-xl">&pound;{{ product.price }}</p>
+                    <SalePrice :price="product.currency" :sale_price="product.sale_price" />
                     <div class="text-gray-600 pb-5" v-html="JSON.parse(product.description)"/>
                     <hr class="pb-5">
 
@@ -60,13 +61,16 @@ const addToCart = () => {
                             <option selected disabled :value="null">Choose a size...</option>
                             <template v-if="sizes">
                                 <template v-for="(size, index) in sizes">
-                                    <option :value="size.sku" :disabled="!size.stock">{{ index }} <span v-if="!size.stock">(Out of stock)</span></option>
+                                    <option
+                                        :value="size.sku"
+                                        :disabled="!size.stock"
+                                    >{{ index }} <span v-if="!size.stock">(Out of stock)</span></option>
                                 </template>
                             </template>
                         </select>
                     </div>
 
-                    <div class="options">
+                    <div class="mb-5">
                         <BaseButton
                             color="blue"
                             tag="button"
@@ -75,12 +79,13 @@ const addToCart = () => {
                             :disabled="!selectedColour || !selectedSize"
                         >Add to cart
                         </BaseButton>
-                        <div v-if="selectedColour">
-                            Selected: <span>{{ selectedColour?.colour }}</span> <br>
-                        </div>
-                        <div v-if="selectedSize">
-                            Sku: <span class="uppercase">{{ selectedSize }}</span>
-                        </div>
+                    </div>
+
+                    <div v-if="selectedColour">
+                        Selected: <span>{{ selectedColour?.colour }}</span> <br>
+                    </div>
+                    <div v-if="selectedSize">
+                        Sku: <span class="uppercase">{{ selectedSize }}</span>
                     </div>
                 </div>
             </div>

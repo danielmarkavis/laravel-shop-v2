@@ -16,7 +16,11 @@ return new class extends Migration
             $table->string('sku')->unique();
             $table->string('description')->nullable();
             $table->decimal('price', 6,2);
+            $table->decimal('sale_price', 6,2)->nullable();
             $table->integer('stock');
+
+//            $table->foreignID('colour_id')->references('id')->on('attributes')->onDelete('cascade'); //->constrained('products')->cascadeOnDelete();
+//            $table->foreignID('size_id')->references('id')->on('attributes')->onDelete('cascade'); //->constrained('products')->cascadeOnDelete();
 
             $table->string('colour');
             $table->string('size');

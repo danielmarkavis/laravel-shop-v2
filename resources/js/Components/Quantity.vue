@@ -41,7 +41,7 @@ const quantity = ref(props.value);
     <div class="relative flex flex-row items-center mt-2">
         <button
             class="border border-gray-300 mr-3 p-2 hover:bg-gray"
-            :class="{'text-gray-200':quantity === min}"
+            :class="{'text-gray-200 border-gray-200': quantity === min}"
             @click="reduce"
             :disabled="quantity === min">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -51,7 +51,7 @@ const quantity = ref(props.value);
         <div>{{quantity}}</div>
         <button
             class="border border-gray-300 ml-3 p-2"
-            :class="{'text-gray-200':quantity === max}"
+            :class="{'text-gray-200 border-gray-200': quantity === max}"
             @click="increase"
             :disabled="quantity === max">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">

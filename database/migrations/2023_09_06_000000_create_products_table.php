@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->text('description');
             $table->decimal('price', 6,2);
+            $table->decimal('sale_price', 6,2)->nullable();
             $table->string('sku')->unique();
             $table->timestamps();
         });

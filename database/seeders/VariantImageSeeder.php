@@ -29,7 +29,7 @@ class VariantImageSeeder extends Seeder
 //                    dd($variant->attributeValues()->attributeOnly('colour')->first()->value);
 //                    $colour = $variant->attributeValues()->attributeOnly('colour')->first()->value;
 
-                    $imageUrl = sprintf("http://dma.local/images/%s.png", $variant->colour);
+                    $imageUrl = sprintf("http://dma.local/images/%s.jpg", $variant->colour);
                     $variant->addMediaFromUrl($imageUrl)->toMediaCollection('default');
                 }
             );

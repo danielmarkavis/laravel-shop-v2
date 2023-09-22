@@ -15,25 +15,25 @@ class VariantSeeder extends Seeder
         Product::all()
             ->each(
                 function(Product $product) {
-                    $colours = ['blue','red','green','yellow','pink'];
-//                    dd(array_rand($colours));
+                    $colours = ['gray','blue','green','red','yellow'];
                     shuffle($colours);
                     $colours = array_slice($colours, 0, rand(1,5));
 
                     foreach($colours as $colour) {
                         $variants = Variant::factory([
                             'price' => $product->price,
+                            'sale_price' => $product->sale_price,
                             'product_id' => $product->id,
                             'colour' => $colour,
                         ])
                             ->count(6)
                             ->sequence(
-                                ['size'=>'xs'],
-                                ['size'=>'sm'],
-                                ['size'=>'md'],
-                                ['size'=>'lg'],
-                                ['size'=>'xl'],
-                                ['size'=>'xxl']
+                                ['size'=>'XS'],
+                                ['size'=>'SM'],
+                                ['size'=>'MD'],
+                                ['size'=>'LG'],
+                                ['size'=>'XL'],
+                                ['size'=>'XXL']
                             )
                             ->create()
                             ->each(function($variant) {
